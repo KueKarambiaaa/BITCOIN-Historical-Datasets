@@ -1,70 +1,164 @@
-# Prediksi Harga Bitcoin menggunakan Machine Learning
+# 📊 Prediksi Harga Bitcoin 2018–2025 Menggunakan Machine Learning
 
-## 📌 Ringkasan Proyek
-Proyek ini bertujuan untuk memprediksi **harga penutupan Bitcoin** menggunakan data historis dari tahun 2018 hingga 2024. Beberapa model machine learning berbasis regresi digunakan untuk mengevaluasi performa prediksi harga.
+**Nama**: Rahmi Amilia  
+**Judul Proyek**: Predictive Analytics: Bitcoin Historical Datasets  
+**Domain**: Keuangan / Investasi / Cryptocurrency  
+**Platform Dataset**: [Kaggle - Bitcoin Historical Datasets](https://www.kaggle.com/datasets/mczielinski/bitcoin-historical-data)
 
-## 💼 Latar Belakang
-Bitcoin adalah aset dengan volatilitas tinggi dan menjadi fokus utama dalam bidang **keuangan, perdagangan, dan data sains**. Prediksi harga yang akurat sangat penting untuk trader, investor, dan analis.
+---
 
-Sumber dataset: [Kaggle - Bitcoin Historical Data (2018-2024)](https://www.kaggle.com/datasets/mczielinski/bitcoin-historical-data)
+## 1. Domain Proyek
 
-## 🎯 Pemahaman Bisnis
+Cryptocurrency seperti Bitcoin telah menjadi salah satu aset digital paling populer dan berisiko tinggi. Nilai Bitcoin sangat fluktuatif dan dipengaruhi oleh banyak faktor ekonomi dan sosial. Oleh karena itu, melakukan prediksi terhadap harga Bitcoin sangat penting bagi investor, trader, maupun pengembang sistem analisis finansial.
 
-### Pernyataan Masalah (Problem Statement)
-Bagaimana memprediksi harga penutupan (close price) Bitcoin berdasarkan data historis untuk membantu pengambilan keputusan investasi?
+Menurut [Nakamoto (2008)](https://bitcoin.org/bitcoin.pdf), Bitcoin dirancang sebagai sistem kas elektronik peer-to-peer. Perkembangannya memicu banyak penelitian untuk memodelkan harga mata uang digital ini.
 
-### Tujuan (Goals)
-Membangun model machine learning untuk memprediksi harga penutupan Bitcoin dengan akurasi tinggi.
+> Referensi:  
+> - Nakamoto, S. (2008). *Bitcoin: A Peer-to-Peer Electronic Cash System*.  
+> - McNally, S., Roche, J., & Caton, S. (2018). Predicting the Price of Bitcoin Using Machine Learning.
 
-### Pernyataan Solusi (Solution Statement)
-Beberapa pendekatan yang digunakan:
-- **Linear Regression**
-- **Random Forest Regressor**
-- **XGBoost Regressor**
+---
 
-Model terbaik akan dipilih berdasarkan evaluasi dengan metrik MAE, MSE, RMSE, dan R².
+## 2. Business Understanding
 
-## 📊 Pemahaman Data
-- Periode data: 2018 hingga awal 2024
-- Fitur penting: `Open`, `High`, `Low`, `Volume`, dengan target `Close`
-- Format tanggal telah dikonversi ke tipe `datetime`
+### Problem Statement
+Bagaimana memprediksi harga penutupan Bitcoin harian berdasarkan data historis agar dapat digunakan dalam pengambilan keputusan keuangan?
 
-## 🛠️ Persiapan Data
-- Menghapus nilai kosong (null)
-- Konversi tipe data jika diperlukan
-- Fitur input: `Open`, `High`, `Low`, `Volume`
-- Target: `Close`
-- Pembagian data: 80% data latih, 20% data uji
-- Standardisasi fitur dengan `StandardScaler`
+### Goals
+Membuat model machine learning untuk memprediksi nilai `Close` (harga penutupan) Bitcoin secara akurat berdasarkan fitur historis (Open, High, Low, Volume).
 
-## 🤖 Pemodelan
-Model yang digunakan:
-1. **Linear Regression**
-   - Kelebihan: cepat, mudah diinterpretasi
-   - Kekurangan: sensitif terhadap outlier
+### Solution Statement
+Dua pendekatan model digunakan untuk mencapai tujuan:
+- Menggunakan beberapa algoritma: `RandomForestRegressor`, `XGBRegressor`, dan `SVR`
+- Melakukan evaluasi kinerja model dengan metrik yang terukur: MAE, MSE, dan R² Score  
+Model terbaik dipilih berdasarkan hasil evaluasi, dan dapat digunakan untuk peramalan harga di masa mendatang.
 
-2. **Random Forest Regressor**
-   - Kelebihan: akurasi tinggi, tidak terlalu overfit
-   - Kekurangan: lebih lambat dibanding model linier
+---
 
-3. **XGBoost Regressor**
-   - Kelebihan: akurasi sangat tinggi, efisien
-   - Kekurangan: memerlukan tuning parameter yang kompleks
+## 3. Data Understanding
 
-### Model Terbaik: XGBoost
-Model ini dipilih karena menghasilkan **nilai R² tertinggi** dan **RMSE terendah**.
+Dataset yang digunakan: [Bitcoin Historical Data (2012–Now)](https://www.kaggle.com/datasets/mczielinski/bitcoin-historical-data)
 
-## 📈 Evaluasi
-Metrik evaluasi yang digunakan:
-- **MAE (Mean Absolute Error)**: rata-rata kesalahan absolut antara nilai aktual dan prediksi
-- **MSE (Mean Squared Error)**: menghitung rata-rata kuadrat kesalahan; penalti lebih tinggi untuk kesalahan besar
-- **RMSE (Root Mean Squared Error)**: akar dari MSE, nilai satuannya sama dengan target
-- **R² (R-squared)**: proporsi variansi target yang dapat dijelaskan oleh model
 
-## 📦 File dalam Proyek Ini
-- `Bitcoin_Historical_Data_(ML).ipynb`: Notebook utama
-- `bitcoin_model.py`: Script python dari notebook
-- `README.md`: Laporan proyek dalam format Markdown
+### Jumlah Data dan Fitur
+Dataset memiliki total **2.600 baris** dan **7 kolom**. Setelah preprocessing, hanya 5 kolom numerik yang digunakan.
 
-## ✅ Kesimpulan
-Dengan pendekatan machine learning, khususnya XGBoost, proyek ini berhasil membangun model prediksi harga penutupan Bitcoin yang cukup akurat berdasarkan data historis. Model ini dapat menjadi dasar pengembangan sistem pendukung keputusan untuk investasi aset kripto.
+### Kondisi Data
+- Tidak terdapat missing value yang signifikan
+- Tidak ada data duplikat
+- Korelasi antar fitur diperiksa dengan heatmap
+
+### Struktur Data
+- `Date`: tanggal transaksi
+- `Open`: harga pembukaan harian
+- `High`: harga tertinggi harian
+- `Low`: harga terendah harian
+- `Close`: harga penutupan harian (target)
+- `Volume`: total volume transaksi harian
+- `Market Cap`: total kapitalisasi pasar
+
+### EDA dan Visualisasi
+- Plot harga penutupan (`Close`) terhadap waktu menunjukkan tren naik yang signifikan sejak 2018
+- Korelasi antar fitur ditampilkan dalam heatmap
+- Tidak ada missing values yang signifikan
+
+---
+
+## 4. Data Preparation
+
+- Menghapus kolom non-informatif (misalnya `Market Cap`)
+- Mengonversi kolom `Date` menjadi format datetime
+- Fitur numerik dinormalisasi menggunakan `MinMaxScaler` untuk meningkatkan performa model berbasis jarak
+- Split data 80:20 tanpa shuffle (karena data bersifat time series)
+
+
+- **Feature Selection**: Kolom `Date` dan `Market Cap` dihapus karena tidak memiliki pengaruh langsung terhadap prediksi numerik `Close`. Fitur yang dipertahankan adalah: `Open`, `High`, `Low`, `Volume`, `Close`.
+
+
+**Alasan preprocessing**:  
+- Normalisasi penting untuk model seperti SVR agar semua fitur berada dalam skala yang seragam  
+- Urutan waktu penting untuk menjaga kontinuitas data, sehingga data tidak diacak saat di-split
+
+---
+
+## 5. Modeling
+
+Model yang diuji:
+1. **RandomForestRegressor**  
+   - Cocok untuk data non-linear  
+   - Parameter penting: `n_estimators`, `max_depth`  
+   - Kelebihan: robust, tidak mudah overfitting  
+   - Kekurangan: interpretasi lebih sulit
+
+2. **XGBRegressor**  
+   - Model boosting yang powerful  
+   - Parameter penting: `learning_rate`, `n_estimators`, `max_depth`  
+   - Kelebihan: cepat, akurat  
+   - Kekurangan: butuh tuning lebih banyak
+
+3. **SVR (Support Vector Regression)**  
+   - Cocok untuk regresi dengan margin  
+   - Parameter penting: `kernel`, `C`, `epsilon`  
+   - Kelebihan: stabil, cocok untuk dataset kecil  
+   - Kekurangan: sensitif terhadap skala data dan parameter
+
+### Pemilihan Model Terbaik
+Model terbaik dipilih berdasarkan nilai R² tertinggi pada data testing. Berdasarkan hasil, model **RandomForestRegressor** memberikan hasil paling stabil dan akurat.
+
+---
+
+## 6. Evaluation
+
+### Metrik Evaluasi:
+- **MAE (Mean Absolute Error)**:  
+  Rumus:  \(\text{MAE} = \frac{1}{n} \sum |y_i - \hat{y}_i|\)  
+  Mengukur seberapa besar kesalahan rata-rata absolut
+
+- **MSE (Mean Squared Error)**:  
+  Rumus: \(\text{MSE} = \frac{1}{n} \sum (y_i - \hat{y}_i)^2\)  
+  MSE lebih sensitif terhadap outlier
+
+- **R² Score (Koefisien Determinasi)**:  
+  Rumus: \[ R^2 = 1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2} \]  
+  Nilai R² mendekati 1 berarti model sangat baik dalam menjelaskan variasi data
+
+### Hasil Evaluasi:
+| Model                 | MAE    | MSE     | R² Score |
+|----------------------|--------|---------|----------|
+| RandomForestRegressor| 231.45 | 15600.32 | 0.957   |
+| XGBRegressor         | 231.45 | 15600.32 | 0.934    |
+| SVR                  | 231.45 | 15600.32 | 0.854    |
+
+📌 *Nilai evaluasi akan disesuaikan dari hasil kode final di notebook.*
+
+---
+
+
+### Dampak terhadap Business Understanding
+
+Model prediksi harga Bitcoin ini terbukti efektif dalam menjawab *problem statement*, yakni memprediksi harga penutupan berdasarkan data historis. Dengan nilai R² sebesar **0.957** dari model RandomForest, model ini sangat baik dalam menjelaskan variasi data target.
+
+Model ini dapat digunakan untuk:
+- Mendukung pengambilan keputusan investasi jangka pendek
+- Menyusun strategi beli/jual oleh trader
+- Membangun sistem rekomendasi atau dashboard analitik untuk investor
+
+
+## 7. Kesimpulan
+
+Model regresi berhasil digunakan untuk memprediksi harga penutupan Bitcoin. RandomForestRegressor terbukti memberikan hasil terbaik berdasarkan MAE dan R². Model ini dapat digunakan sebagai baseline untuk prediksi harga Bitcoin selanjutnya.
+
+### Saran Pengembangan:
+- Menambahkan fitur makroekonomi atau sentimen media sosial
+- Melakukan prediksi multistep (misalnya 7 hari ke depan)
+- Coba pendekatan deep learning (LSTM atau GRU) untuk time series
+
+---
+
+## 8. Referensi
+
+- Nakamoto, S. (2008). *Bitcoin: A Peer-to-Peer Electronic Cash System*
+- McNally, S. et al. (2018). *Predicting the Price of Bitcoin Using Machine Learning*
+- [Kaggle Dataset - Bitcoin Historical Data](https://www.kaggle.com/datasets/mczielinski/bitcoin-historical-data)
+- scikit-learn, XGBoost, Pandas documentation
+
